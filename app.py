@@ -22,7 +22,9 @@ try:
     if not MONGO_URI:
         raise ValueError("MONGO_URI environment variable not set")
 
-    client = MongoClient(MONGO_URI)
+    client = MongoClient(MONGO_URI, serverSelectionTimeoutMS=5000, connectTimeoutMS=30000, maxPoolSize=10,)
+    client.admin.command('ping')
+    
     db = client['personal_finance_tracker']  # Use your database name
     entries_collection = db['financial_entries']  # Collection for financial entries
     users_collection = db['users']  # Collection for users
