@@ -5,3 +5,5 @@ werkzeug==2.2.2
 flask-jwt-extended==4.4.4
 gunicorn
 pymongo[srv]
+dnspython
+bson
