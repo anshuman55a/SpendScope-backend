@@ -17,15 +17,19 @@ jwt = JWTManager(app)
 
 # MongoDB connection
 try:
-    client = MongoClient('mongodb://localhost:27017/')
-    db = client['personal_finance_tracker']
-    entries_collection = db['financial_entries']
-    users_collection = db['users']  # Collection for users
-    print("Connected to MongoDB")
-except errors.ConnectionError as e:
-    print("Error connecting to MongoDB : ", e)
-    exit(1)
+    # Read the MongoDB URI from environment variables
+    MONGO_URI = os.getenv("MONGO_URI")
+    if not MONGO_URI:
+        raise ValueError("MONGO_URI environment variable not set")
 
+    client = MongoClient(MONGO_URI)
+    db = client['personal_finance_tracker']  # Use your database name
+    entries_collection = db['financial_entries']  # Collection for financial entries
+    users_collection = db['users']  # Collection for users
+    print("Connected to MongoDB Atlas")
+except (errors.ConnectionFailure, ValueError) as e:
+    print("Error connecting to MongoDB: ", e)
+    exit(1)
 # Helper function to convert MongoDB document to JSON serializable format
 def entry_to_json(entry):
     return {
