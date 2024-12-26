@@ -42,6 +42,11 @@ def entry_to_json(entry):
         "type": entry["type"]
     }
 
+
+@app.route('/')
+def home():
+    return jsonify({"message": "Welcome to the Personal Finance Tracker API"}), 200
+
 # User registration
 @app.route('/register', methods=['POST'])
 def register():
