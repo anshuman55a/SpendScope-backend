@@ -16,7 +16,7 @@ app = Flask(__name__)
 
 # CORS Configuration - Hardened for security
 CORS(app, 
-     origins=["http://localhost:3000", "https://spendscope-frontend.onrender.com"],
+     origins=["http://localhost:3000", "https://spendscope.netlify.app"],
      supports_credentials=True,
      allow_headers=["Content-Type", "Authorization"],
      methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"])
